@@ -61,26 +61,26 @@
   let keys = document.querySelectorAll('.key');
   let sounds = document.querySelectorAll('audio');
 
-  document.addEventListener('keydown', function(e){
+  window.addEventListener('keydown', function(e){
     keys.forEach((div) => {
       let divDataKey = div.getAttribute('data-key');
 
       if (divDataKey == e.keyCode){
-        div.classList.toggle('playing');
+        div.classList.add('playing');
 
         sounds.forEach((audio) => {
           let audioDataKey = audio.getAttribute('data-key');
-            if (divDataKey == audioDataKey){
-              audio.play();
-              audio.onended = function (){
-                div.classList.toggle('playing');
-              };
-            } else {
+
+          if (divDataKey == audioDataKey){
+            audio.currentTime = 0; //from official solution
+            audio.play();
+            audio.onended = function (){
+              div.classList.remove('playing');
             };
+          };
         });
-      } else {
       };
-    });
+    });    
   });
 </script>
 

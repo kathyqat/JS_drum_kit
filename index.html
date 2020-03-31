@@ -63,23 +63,23 @@
 
   document.addEventListener('keydown', function(e){
     keys.forEach((div) => {
-      let playedKey;
-      let dataKey = div.getAttribute('data-key');
+      let divDataKey = div.getAttribute('data-key');
 
-      if (dataKey == e.keyCode){
+      if (divDataKey == e.keyCode){
         div.classList.toggle('playing');
-        playedKey = div;
 
         sounds.forEach((audio) => {
           let audioDataKey = audio.getAttribute('data-key');
-            if (dataKey == audioDataKey){
+            if (divDataKey == audioDataKey){
               audio.play();
+              audio.onended = function (){
+                div.classList.toggle('playing');
+              };
             } else {
             };
         });
       } else {
       };
-      // playedKey.classList.toggle('playing');
     });
   });
 </script>
